@@ -1,0 +1,89 @@
+<div class="head">
+
+{% extends "base.html" %}
+{% block title %} Inventario {% endblock title %}
+
+{% block content %}
+
+</div>
+
+	<div class="entradaInventario" ng-controller="ImprimirInventarioCtrl">
+		<header class="header-ei">
+			<span class="titulo"> COOPERATIVA </span>
+			<span class="localidad"> ZONA IND. LA ISABELA </span>
+			<span class="numeracion"> 2397299 </span>
+			<p class="tituloRPT"> Entrada de Mercancia al Inventario</p>
+		</header>
+
+		<section class="-cabecera">
+			<table class="table-cabecera">
+				<tr>
+					<td><strong>Entrada No.:</strong> [[entrada.id | numberFixedLen : 8]]</td>
+					<td><strong>ESTATUS:</strong> [[posteo]]</td>
+				</tr>
+				<tr>
+					<td><strong>De Fecha:</strong> [[entrada.fecha | date : 'dd/MM/yyyy']]</td>
+					<td><strong>Fecha de Vencimiento:</strong> [[fechaVence]]</td>
+				</tr>
+				<tr>
+					<td><strong>Factura No.:</strong> [[entrada.factura]]</td>
+					<td><strong>NCF:</strong> [[entrada.NCF]]</td>
+				</tr>
+				<tr>
+					<td><strong>Nota o Recibido por:</strong> [[condicion]]</td>
+					<td><strong>Fecha:</strong> [[hoy | date : 'dd/MM/yyyy']]</td>
+				</tr>
+				<tr>
+					<td colspan="2"><strong>Suplidor:</strong> [[entrada.suplidorId]] - [[entrada.suplidorName]]</td>
+				</tr>
+			</table>
+			
+		</section>
+
+		<section class="detalle">
+			<table class="table-productos">
+				<tr>
+					<td>CODIGO</td>
+					<td>DESCRIPCION</td>
+					<td>ALMACEN</td>
+					<td>Existencia Anterior</td>
+					<td>Cantidad</td>
+					<td>Costo</td>
+					<td>Valor</td>
+				</tr>
+
+				<tr ng-repeat="producto in productos">
+					<td>[[producto.codigo]]</td>
+					<td>[[producto.descripcion]]</td>
+					<td>[[producto.almacenDescrp]]</td>
+					<td>[[producto.cantidadAnterior]]</td>
+					<td>[[producto.cantidad]]</td>
+					<td>[[producto.costo]]</td>
+					<td>[[producto.costo * (producto.cantidad) | number : 2]]</td>
+					
+				</tr>
+				<tr>
+					<td colspan="3">TOTALES</td>
+					<td>[[totalCantidadAnterior_ | number : 2]]</td>
+					<td>[[totalCantidad_ | number : 2]]</td>
+					<td>[[totalCosto_ | number : 2]]</td>
+					<td>[[totalValor_ | number : 2]]</td>
+				</tr>
+
+			</table>
+
+			<div class="firma">
+				<span class="linea">___________________________________</span>
+				<span class="recibido">Recibido Por</span>
+			</div>
+
+			<div class="totales">
+				
+			</div>
+		</section>
+	</div>
+
+<div class="pie">
+{% endblock content %}
+	
+</div>

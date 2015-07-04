@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %} Transferencia Inventario {% endblock title %}
+
+{% block content %}
+
+	<div class="TransferenciaInv" ng-controller="TransfInvCtrl">
+		
+		<mensajeerror> </mensajeerror>
+
+		<div class="transf-almacenes">
+			
+			<!--Transferencia Inventario-->
+			<div class="sub-menu">	
+				<div class="menu-entrada-inventario-listado">
+					<button class="nuevo icon-file" title="Nueva entrada de Inventario" ng-click="nuevaTransf()"></button>
+				</div>
+				Transferencia entre almacenes
+			</div>
+
+			<form name="TransfForm" class="data-entry-section" ng-submit="guardarTransfInv()" ng-init="getAlmacen()" novalidate>
+				<div class="data-entry-transf-header">
+					
+					<ul class="ul-almacen-transf">
+						<li>Almacen Origen</li>
+						<li>
+							<select name="almacen" id="almacen" ng-model="dataH.almacenOrigen" ng-change="refrescar()" class="field-choices" required>
+								<option ng-repeat="almacen in almacenes" value="[[almacen.id]]">[[almacen.descripcion]]</option>
+							</select>
+						</li>
+					</ul>
+
+					<ul class="ul-almacen-transf">
+						<li>Almacen Destino</li>
+						<li>
+							<select name="almacen" id="almacen" ng-model="dataH.almacenDestino" ng-change="refrescar()" class="field-choices" required>
+								<option ng-repeat="almacen in almacenes" value="[[almacen.id]]">[[almacen.descripcion]]</option>
+							</select>
+						</li>
+					</ul>
+
+					<table class="data-entry-header-table">
+						<tr class="transf-almacenes-header">
+							<td>Codigo</td>
+							<td>Producto</td>
+							<td>Existencia Origen</td>
+							<td> Existencia Destino </td>
+						</tr>
+
+						<tr class="transf-almacenes-detail">
+							<td><input type="text" class="quitar-borde" ng-model="codigoProducto" required readonly></td>
+							<td><input type="text" class="quitar-borde" ng-model="producto" ng-keyup="getProducto($event)" ng-focus="tableProducto=false" ng-click="tableProducto=false; errorShow=false;" select-on-click placeholder="Digite producto"></td>
+							<td><input type="text" class="quitar-borde" ng-model="existencia1" required readonly></td>
+							<td><input type="text" class="quitar-borde" ng-model="existencia2" readonly></td>
+						</tr>
+					</table>
+					
+					<div class="contenedor-productos">
+						<productosSearch> </productosSearch>
+					</div>
+
+
+					<div class="cantidad-transferir">
+						<span><strong>Cantidad a Transferir</strong></span>
+						<input type="text" class="field-short cantidad-transf-field" ng-model="cntTransf" ng-keyup="cantidadTransferir($event)" required>
+						<button class="Boton boton-transf-cantidad" type="submit">Transferir</button>
+					</div>
+						
+				</div>
+			</form>
+
+					
+			<div class="sub-menu">	
+				Listado de Transferencias
+			</div>
+
+			<section class="productos-section-transf registrosPanel" ng-init="ListadoTransfAlmacenes()">
+				<table class="productos-table-transf">
+					<tr class="productos-table-header-transf">
+						<td>Secuencia</td>
+						<td>Fecha</td>
+						<td>Almacen Origen</td>
+						<td>Almacen Destino</td>
+						<td>Descripción Producto</td>
+						<td>Cantidad Transf.</td>
+					</tr>
+					<tr class="productos-table-detail-transf" ng-repeat="transf in transferencias">
+						<td>[[transf.id | numberFixedLen : 8]]</td>
+						<td>[[transf.fechaTransf | date : 'dd/MM/yyyy']]</td>
+						<td>[[transf.desdeAlmacen]]</td>
+						<td>[[transf.hastaAlmacen]]</td>
+						<td>[[transf.producto]]</td>
+						<td>[[transf.cantidad | number : 2]]</td>
+					</tr>		
+				</table>
+
+			</section>
+			<button class="icon-save Boton boton-guarda-transf" ng-click="ListadoTransfAlmacenes()">Refrescar</button>
+
+		</div>
+		
+	</div>
+
+{% endblock content %}
