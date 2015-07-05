@@ -25,7 +25,7 @@
 			
 		</figure>
 
-		<div class="icon-user usuario">{{user}} | {{localidad}}</div>
+		<div class="icon-user usuario">{{user}}</div>
 
 		<div class="content-title">
 			<p class="titleCoop"> GUELI</p>
@@ -36,21 +36,6 @@
 	
 	<nav id="idmenu" class="nav-menu" ng-controller="MenuController">
 		<ul class="ul-menu">
-			<li class="menu-item" id="menu1"> <a class="menu-opcion" href="/ahorro">Ahorros</a> </li>
-			<li ng-disabled="true" class="menu-item" id="menu2"> <a class="menu-opcion" ng-click="ShowSubMenuP(true)" ng-mouseleave="ShowSubMenuP(false)" href="#" a-disabled="{{prestamos}}">Prestamos</a> </li>
-			<li class="menu-item" id="menu3"> <a class="menu-opcion" href="#">Activos Fijos</a> </li>
-			<li ng-hide="{{contabilidad}}" class="menu-item" id="menu4"> <a class="menu-opcion" ng-click="ShowSubMenuCont(true)"
-			ng-mouseleave-"ShowSubMenuCont(false)" href="#">Contabilidad</a></li>
-			<li class="menu-item" id="menu5"> <a class="menu-opcion" href="#">Recibos de Ingresos</a></li>
-			<li class="menu-item" id="menu6"> <a class="menu-opcion" href="/desembolso">Desembolsos</a></li>
-			
-			<li ng-hide="{{inventario}}" class="menu-item" id="menu7"> <a class="menu-opcion" ng-click="ShowSubMenuInv(true)" ng-mouseleave="ShowSubMenuInv(false)" href="#">Inventario</a> </li>
-			<li ng-hide="{{facturacion}}" class="menu-item" id="menu8"> <a class="menu-opcion" ng-click="ShowSubMenuFact(true)" ng-mouseleave="ShowSubMenuFact(false)" href="#">Facturacion</a> </li>
-
-			<li class="menu-item" id="menu9"> <a class="menu-opcion" href="#">Conciliacion</a></li>
-			<li ng-hide="{{nomina}}" class="menu-item" id="menu10"> <a class="menu-opcion" ng-click="ShowSubMenuNomina(true)" ng-mouseleave="ShowSubMenuNomina(false)" href="#">Nomina</a> </li>
-
-			<li ng-hide="{{cxp}}" class="menu-item" id="menu11"> <a class="menu-opcion" ng-click="ShowSubMenuCxp(true)" ng-mouseleave="ShowSubMenuCxp(false)" href="#">CxP</a></li>
 			<li class="menu-item" id="menu12"> <a class="menu-opcion"  href="/admin">Administracion</a></li>
 		</ul>
 
