@@ -1,6 +1,6 @@
 (function (_) {
 
-  angular.module('cooperativa.inventarioRPT',['ngAnimate'])
+  angular.module('gueli.inventarioRPT',['ngAnimate'])
 
     .factory('InventarioServiceRPT', ['$http', '$q', '$filter', function ($http, $q, $filter) {
 

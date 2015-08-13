@@ -1,64 +1,27 @@
 (function () {
 
-  var app = angular.module('cooperativa', [
-    'cooperativa.menu',
-    'cooperativa.homepage',
-    'cooperativa.nomina',
-    'cooperativa.facturacion',
-    'cooperativa.inventario',
-    'cooperativa.inventarioRPT',
-    'cooperativa.fondoscajas',
-    'cooperativa.notadebito',
-    'cooperativa.notacredito',
-    'cooperativa.ahorro',
-    'cooperativa.solicitudprestamo',
-    'cooperativa.maestraprestamo',
-    'cooperativa.solicitudod',
-    'cooperativa.cxp',
-    'cooperativa.desembolsoelectronico',
-    'cooperativa.contabilidad'
+  var app = angular.module('gueli', [
+    'gueli.menu',
+    'gueli.homepage',
+    'gueli.inventario',
+    'gueli.inventarioRPT'
     ]);
 
   app.factory('appService', ['$http', '$q', '$filter', function ($http, $q, $filter) {
 
-    function generarArchivoBanco(header, detalle) {
-      var deferred = $q.defer();
-
-      $http.post('/generarArchivoBanco/', JSON.stringify({'CABECERA': header, 'DETALLE': detalle})).
-        success(function (data) {
-          deferred.resolve(data);
-        }).
-        error(function (data) {
-          deferred.resolve(data)
-        });
-      return deferred.promise;
-    }
-
-    //Traer Cuentas Contables
-    function allCuentasContables() {
-      var deferred = $q.defer();
-
-      $http.get('/api/cuentas/?format=json')
-        .success(function (data) {
-          deferred.resolve(data);
-        });
-      return deferred.promise;
-    }
-
+ 
     //Traer Documentos Relacionados a Cuentas
     function getDocumentoCuentas(doc) {
       var deferred = $q.defer();
 
-      $http.get('/api/documentoCuentas/{doc}/?format=json'.replace('{doc}', doc))
-        .success(function (data) {
-          deferred.resolve(data);
-        });
-      return deferred.promise;
+      // $http.get('/api/documentoCuentas/{doc}/?format=json'.replace('{doc}', doc))
+      //   .success(function (data) {
+      //     deferred.resolve(data);
+      //   });
+      // return deferred.promise;
     }
 
     return {
-      generarArchivoBanco: generarArchivoBanco,
-      allCuentasContables: allCuentasContables,
       getDocumentoCuentas: getDocumentoCuentas
     };
 
@@ -164,14 +127,6 @@
     return {
       restrict: 'E',
       templateUrl: '/mensajeInfo'
-    }
-  });
-
-  // Directiva para tabla de cuentas.
-  app.directive('cuentassearch', function () {
-    return {
-      restrict: 'E',
-      templateUrl: '/cuentasSearch'
     }
   });
 

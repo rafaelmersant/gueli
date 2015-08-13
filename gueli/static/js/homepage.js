@@ -1,6 +1,6 @@
 (function (_) {
 
-  angular.module('cooperativa.homepage', ['ngAnimate'])
+  angular.module('gueli.homepage', ['ngAnimate'])
     
     .factory('HomePageService', ['$http', '$q', '$filter', function ($http, $q, $filter) {
 

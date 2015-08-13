@@ -8,7 +8,6 @@
 	<div class="Inventario" ng-controller="ListadoEntradaInvCtrl">
 
 		<mensajeerror> </mensajeerror>
-		<mensajeinfo> </mensajeinfo>				
 		
 		<div class="sub-menu">	
 			<div class="menu-entrada-inventario-listado">
@@ -29,18 +28,18 @@
 				<span class="error-ei"> [[NoFoundDoc]]</span>
 				<a href="#" class="[[verTodos]] icon-buscar" ng-click="listadoEntradas()">Ver todos</a>
 				
-				<div class="posteo-ei">
+				<!-- <div class="posteo-ei">
 					<span>Posteadas</span>
 					<select class="field-choices" name="posteo" id="posteo" ng-model="posteof" ng-change="filtrarPosteo()">
 						<option value="*">TODOS</option>
 						<option value="S">SI</option>
 						<option value="N">NO</option>
 					</select>
-				</div>
+				</div> -->
 
 				<section class="registrosPanel">
 					<figure class="fig-load [[mostrar]]">
-						<img class="img-load" src="/static/images/loading.gif" alt="">
+						<!-- <img class="img-load" src="/static/images/loading.gif" alt=""> -->
 					</figure>
 					
 					<table class="listado-table-ei" id="table-ei-listado">

@@ -1,6 +1,6 @@
 (function (_) {
 
-  angular.module('cooperativa.inventario',['ngAnimate'])
+  angular.module('gueli.inventario',['ngAnimate'])
 
     .factory('InventarioService', ['$http', '$q', '$filter', function ($http, $q, $filter) {
 
@@ -395,7 +395,6 @@
       $scope.entradas = {};
       $scope.dataH = {};
 
-      $scope.desgloseCuentas = [];
       $scope.entradasSeleccionadas = [];
       $scope.reg = [];
       $scope.valoresChk = [];
@@ -403,18 +402,6 @@
 
       $scope.fecha = $filter('date')(Date.now(),'dd/MM/yyyy');
       $scope.ArrowLEI = 'UpArrow';
-
-      // Cuentas
-      $scope.cuentasBuscar = function($event) {
-
-        appService.allCuentasContables().then(function (data) {
-          if(data.length > 0) {
-            console.log(data);
-            $scope.cuentasContables = data
-            $scope.tableCuenta = true;
-          }
-        });
-      }
 
       // Mostrar/Ocultar panel de Listado de Entrada Inventario
       $scope.toggleLEI = function() {
@@ -914,58 +901,7 @@
         $window.open('/inventario/print/{entrada}'.replace('{entrada}',entrada.id), target='_blank'); 
       }
 
-      // Agregar una cuenta
-      $scope.addCuentaContable = function($event, cuenta) {
-        $event.preventDefault();
-        var desgloseCuenta = new Object();
-
-        desgloseCuenta.cuenta = cuenta.codigo;
-        desgloseCuenta.descripcion = cuenta.descripcion;
-        desgloseCuenta.ref = $scope.desgloseCuentas[$scope.desgloseCuentas.length-1].ref;
-        desgloseCuenta.debito = 0;
-        desgloseCuenta.credito = 0;
-
-        $scope.desgloseCuentas.push(desgloseCuenta);
-        $scope.tableCuenta = false;
-      }
-
-      //Funcion para postear los registros seleccionados. (Postear es llevar al Diario)
-      $scope.postear = function(){
-        var idoc = 0;
-        $scope.iDocumentos = 0;
-        $scope.totalDebito = 0.00;
-        $scope.totalCredito = 0.00;
-
-        $scope.showPostear = true;
-        $scope.desgloseCuentas = [];
-
-        appService.getDocumentoCuentas('EINV').then(function (data) {
-          $scope.documentoCuentas = data;
-  
-          //Prepara cada linea de posteo
-          $scope.entradasSeleccionadas.forEach(function (item) {
-            $scope.documentoCuentas.forEach(function (documento) {
-              var desgloseCuenta = new Object();
-              if (documento.accion == 'D') {
-                $scope.totalDebito += parseFloat(item.totalGeneral.toString().replace('$','').replace(',',''));
-              } else {
-                $scope.totalCredito += parseFloat(item.totalGeneral.toString().replace('$','').replace(',',''));
-              }
-
-              desgloseCuenta.cuenta = documento.getCuentaCodigo;
-              desgloseCuenta.descripcion = documento.getCuentaDescrp;
-              desgloseCuenta.ref = documento.getCodigo + item.id;
-              desgloseCuenta.debito = documento.accion == 'D'? item.totalGeneral.toString().replace('$','') : $filter('number')(0.00, 2);
-              desgloseCuenta.credito = documento.accion == 'C'? item.totalGeneral.toString().replace('$','') : $filter('number')(0.00, 2);
-
-              $scope.desgloseCuentas.push(desgloseCuenta);
-            });
-            idoc += 1;
-          });
-          $scope.iDocumentos = idoc;
-        });
-      }
-
+ 
     }])
   
   //****************************************************
@@ -1829,54 +1765,7 @@
         }
       }
 
-      // Agregar una cuenta
-      $scope.addCuentaContable = function($event, cuenta) {
-        $event.preventDefault();
-        var desgloseCuenta = new Object();
-
-        desgloseCuenta.cuenta = cuenta.codigo;
-        desgloseCuenta.descripcion = cuenta.descripcion;
-        desgloseCuenta.ref = $scope.desgloseCuentas[$scope.desgloseCuentas.length-1].ref;
-        desgloseCuenta.debito = 0;
-        desgloseCuenta.credito = 0;
-
-        $scope.desgloseCuentas.push(desgloseCuenta);
-        $scope.tableCuenta = false;
-      }
-
-      //Funcion para postear los registros seleccionados. (Postear es llevar al Diario)
-      $scope.postear = function(salidaItem){
-        var idoc = 0;
-        $scope.iDocumentos = 0;
-        $scope.totalDebito = 0.00;
-        $scope.totalCredito = 0.00;
-
-        $scope.showPostear = true;
-        $scope.desgloseCuentas = [];
-
-        appService.getDocumentoCuentas('SINV').then(function (data) {
-          $scope.documentoCuentas = data;
-
-          //Prepara cada linea de posteo
-          $scope.documentoCuentas.forEach(function (documento) {
-            var desgloseCuenta = new Object();
-            if (documento.accion == 'D') {
-              $scope.totalDebito += parseFloat(salidaItem.totalGeneral.toString().replace('$','').replace(',',''));
-            } else {
-              $scope.totalCredito += parseFloat(salidaItem.totalGeneral.toString().replace('$','').replace(',',''));
-            }
-
-            desgloseCuenta.cuenta = documento.getCuentaCodigo;
-            desgloseCuenta.descripcion = documento.getCuentaDescrp;
-            desgloseCuenta.ref = documento.getCodigo + salidaItem.id;
-            desgloseCuenta.debito = documento.accion == 'D'? salidaItem.totalGeneral.toString().replace('$','') : $filter('number')(0.00, 2);
-            desgloseCuenta.credito = documento.accion == 'C'? salidaItem.totalGeneral.toString().replace('$','') : $filter('number')(0.00, 2);
-
-            $scope.desgloseCuentas.push(desgloseCuenta);
-          });
-        });
-      }
-
+      
     }])
 
 })(_);  

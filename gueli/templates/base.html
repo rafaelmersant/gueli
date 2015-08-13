@@ -14,7 +14,7 @@
 	<link rel="stylesheet" type="text/css" href={% static "css/print_estilos.css" %}>
 	<link rel="stylesheet" type="text/css" href={% static "css/jquery-ui.css" %}>
 
-	<link rel="shortcut icon" type="image/png" href={% static "images/logoCoop.png" %} />
+	<link rel="shortcut icon" type="image/png" href={% static "images/goma.jpg" %} />
 
 </head>
 
@@ -36,13 +36,20 @@
 	
 	<nav id="idmenu" class="nav-menu" ng-controller="MenuController">
 		<ul class="ul-menu">
-			<li class="menu-item" id="menu12"> <a class="menu-opcion"  href="/admin">Administracion</a></li>
+			<li class="menu-item" id="menu12"> <a class="menu-opcion"  href="/inventario">Entrada Inventario</a></li>
+			<li class="menu-item" id="menu13"> <a class="menu-opcion"  href="/inventario/salida">Salida Inventario</a></li>
+			<li class="menu-item" id="menu14"> <a class="menu-opcion"  href="/inventario/ajuste">Ajuste de Inventario</a></li>
+			<!-- <li class="menu-item" id="menu15"> <a class="menu-opcion"  href="/inventario/transferencia">Transferencia entre Almacenes</a></li> -->
+
+			<li class="menu-item" id="menu14"> <a class="menu-opcion"  href="/admin">Administracion</a></li>
+			
+			<!-- <li><a href="/inventario/reportes/existenciaArticulo/">Reporte de Existencia de Articulo</a></li>
+			<li><a href="/inventario/reportes/conteoFisico">Reporte Conteo Fisico</a></li>
+			<li><a href="/inventario/reportes/histMovArt">Historico Movimiento de Articulo</a></li> -->
 		</ul>
 
 	<!-- SUB MENU DE INVENTARIO -->
 <!-- 	<ul class="sub-menu-inventario" ng-show="SubMInventario" ng-mouseover="ShowSubMenuInv(true)" ng-mouseleave="ShowSubMenuInv(false)">
-		<li><a href="/inventario">Entrada de Inventario</a></li>
-		<li><a href="/inventario/salida/">Salida de Inventario</a></li>
 		<li><a href="/inventario/ajuste">Ajuste de Inventario</a></li>
 		<li><a href="/inventario/transferencia">Transferencia entre Almacenes</a></li>
 		<li><hr></li>
@@ -73,27 +80,12 @@
 	<script type="text/javascript" src={% static "js/lib/angular-router.min.js" %} ></script>
 	<script type="text/javascript" src={% static "js/lib/angular-animate.min.js" %} ></script>
 
-	<script type="text/javascript" src={% static "js/app.js" %} ></script>
-	<script type="text/javascript" src={% static "js/menu.js" %} ></script>
-	<script type="text/javascript" src={% static "js/homepage.js" %} ></script>
-<!-- 	// <script type="text/javascript" src={% static "js/nomina.js" %} ></script>
-	// <script type="text/javascript" src={% static "js/facturacion.js" %} ></script>
-	// <script type="text/javascript" src={% static "js/inventario.js" %} ></script>
-	// <script type="text/javascript" src={% static "js/rpt_inventario.js" %} ></script>
-	// <script type="text/javascript" src={% static "js/fondoscajas.js" %} ></script>
-	// <script type="text/javascript" src={% static "js/solicitudprestamo.js" %} ></script>
-	// <script type="text/javascript" src={% static "js/solicitudordendespacho.js" %} ></script>
-	// <script type="text/javascript" src={% static "js/desembolsoelectr.js" %} ></script>
-	// <script type="text/javascript" src={% static "js/maestraprestamo.js" %} ></script>
-	// <script type="text/javascript" src={% static "js/desembolsoelectr.js" %} ></script>
-	// <script type="text/javascript" src={% static "js/notacredito.js" %} ></script>
-	// <script type="text/javascript" src={% static "js/notadebito.js" %} ></script>
-	// <script type="text/javascript" src={% static "js/libs/ahorro.js" %}></script>
-	// <script type="text/javascript" src={% static "js/libs/cxp.js" %}></script>
-	// <script type="text/javascript" src={% static "js/libs/contabilidad.js" %}></script> -->
 
-
-
+	<script type="text/javascript" src={% static "js/app.js" %}> </script>
+	<script type="text/javascript" src={% static "js/menu.js" %}> </script>
+	<script type="text/javascript" src={% static "js/homepage.js" %}> </script>
+	<script type="text/javascript" src={% static "js/inventario.js" %}> </script>
+	<script type="text/javascript" src={% static "js/rpt_inventario.js" %} ></script>
 
 </body>
 </html>
