@@ -44,7 +44,7 @@
 					
 					<table class="listado-table-ei" id="table-ei-listado">
 						<tr class="listado-table-header-ei">
-							<td>Postear</td>
+							<!-- <td>Postear</td> -->
 							<td>Estatus</td>
 							<td>Documento</td>
 							<td>Fecha</td>
@@ -53,9 +53,9 @@
 						</tr>
 
 						<tr ng-repeat="salida in salidas" class="listado-entrada-inventario-detail" ng-init="total=0">
-							<td class="align-center"> 
+							<!-- <td class="align-center"> 
 								<a href="#" class="icon-cog icon-imprimir" ng-click="postear(salida)"></a>
-							</td>
+							</td> -->
 							<td class="[[salida.posteo | posteoFolderIcon]] posteo-[[salida.posteo]] align-center"></td>
 							<td> <a href="#" class="sp-field" ng-click="DocFullById(salida.id)"> [[salida.id | numberFixedLen: 8]] </a> </td>
 							<td>[[salida.fecha | date: 'dd/MM/yyyy']]</td>
