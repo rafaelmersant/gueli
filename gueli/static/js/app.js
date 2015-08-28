@@ -4,7 +4,8 @@
     'gueli.menu',
     'gueli.homepage',
     'gueli.inventario',
-    'gueli.inventarioRPT'
+    'gueli.inventarioRPT',
+    'gueli.facturacion'
     ]);
 
   app.factory('appService', ['$http', '$q', '$filter', function ($http, $q, $filter) {

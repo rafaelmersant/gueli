@@ -141,6 +141,9 @@
     .controller('RPTMovimientoArticuloCtrl', ['$scope', '$filter', 'InventarioService', 'InventarioServiceRPT', 
                                               function ($scope, $filter, InventarioService, InventarioServiceRPT) {
 
+      $scope.desdeFecha = $filter('date')(Date.now(), 'dd/MM/yyyy');
+      $scope.hastaFecha = $filter('date')(Date.now(), 'dd/MM/yyyy');
+
       //Traer productos
       $scope.getProducto = function($event) {
         $event.preventDefault();

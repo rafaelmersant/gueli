@@ -16,10 +16,14 @@ from inventario.views import InventarioView, InventarioSalidaView, AjusteInvView
 from inventario.views import ListadoEntradasInvView, ListadoAlmacenesView, getExistenciaByProductoView, \
                                 getExistenciaRPT, RPTMovimientoProductoAPIView
 
+from facturacion.views import FacturacionView, FacturaById, ImprimirFacturaView, RPTUtilidades, RPTUtilidadesView, RPTVentasDiariasView, \
+                                RPTVentasResumidoView, RPTResumenVentas, FacturaEliminarView
+
 #ViewSets
 from administracion.views import SuplidorTipoViewSet, ProductoViewSet, CategoriaProductoViewSet, SuplidorViewSet, \
                                     ProductoByDescrpView, SuplidorByNombreView
 
+from facturacion.views import ListadoFacturasViewSet
 
 admin.site.site_header = 'GUELI AUTOGOMAS'
 
@@ -37,6 +41,9 @@ router.register(r'almacenes', ListadoAlmacenesView)
 router.register(r'ajustesInventario', ListadoAjustesInvView)
 router.register(r'transfAlmacenes', ListadoTransfInvView)
 router.register(r'producto', ProductoViewSet)
+
+#facturacion
+router.register(r'facturas', ListadoFacturasViewSet)
 
 urlpatterns = patterns('',
     
@@ -79,6 +86,20 @@ urlpatterns = patterns('',
     url(r'^inventario/api/reportes/existencia/conteoFisico/$', getExistenciaConteoFisicoRPT.as_view(), name='existencia_conteoFisico_api'),
     url(r'^api/inventario/movimiento/(?P<codProd>[\w\s]+)/(?P<fechaInicio>[\w\-]+)/(?P<fechaFin>[\w\-]+)/(?P<almacen>[\d]+)/$', \
     			 RPTMovimientoProductoAPIView.as_view(), name='mov_producto_api'),
+
+    #Facturacion    
+    url(r'^facturajson/$', FacturaById.as_view(), name='FacturaById'),
+    url(r'^facturacion/$', FacturacionView.as_view(), name='Facturacion'),
+    url(r'^facturacion/eliminar/$', FacturaEliminarView.as_view(), name='Facturacion_eliminar'),
+    #Factura#Imprimir
+    url(r'^facturacion/print/(?P<factura>[\d]+)/$', ImprimirFacturaView.as_view(), name='factura_print'),
+    #Facturacion#Reportes
+    url(r'^facturacion/reportes/utilidades/$', RPTUtilidades.as_view(), name='Reporte_Utilidades'),
+    url(r'^facturacion/reportes/utilidades/vista/$', RPTUtilidadesView.as_view(), name='Reporte_Utilidades_vista'),
+    url(r'^facturacion/reportes/ventasDiarias/$', RPTVentasDiariasView.as_view(), name='Reporte_ventasDiarias'),
+    url(r'^facturacion/reportes/ventasResumido/$', RPTVentasResumidoView.as_view(), name='Reporte_ventasResumido'),
+    url(r'^facturacion/reportes/ventasResumido/json/$', RPTResumenVentas.as_view(), name='Reporte_ventasResumido_json'),
+    
 
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/', include(router.urls)),

@@ -48,8 +48,8 @@
 							<td>Estatus</td>
 							<td>Doc. No.</td>
 							<td>Fecha</td>
-							<td>NCF</td>
-							<td>Factura</td>
+							<!-- <td>NCF</td> -->
+							<!-- <td>Factura</td> -->
 							<td>Suplidor</td>
 							<td>Total</td>
 							<td>Imprimir</td>
@@ -64,8 +64,8 @@
 							<td class="[[entrada.posteo | posteoFolderIcon]] posteo-[[entrada.posteo]] align-center"></td>
 							<td> <a href="#" class="sp-field" ng-click="DocFullById(entrada.id)"> [[entrada.id | numberFixedLen: 8]] </a> </td>
 							<td>[[entrada.fecha | date: 'dd/MM/yyyy']]</td>
-							<td>[[entrada.ncf]]</td>
-							<td>[[entrada.factura]]</td>
+							<!-- <td>[[entrada.ncf]]</td> -->
+							<!-- <td>[[entrada.factura]]</td> -->
 							<td>[[entrada.suplidor]]</td>
 							<td class="resaltar-valor align-right">[[entrada.totalGeneral]]</td>
 							<td class="align-center">
@@ -134,15 +134,15 @@
 							<td>Entrada No.</td>
 							<td> <input class="input-disabled" type="text" ng-disabled="true" ng-model="dataH.entradaNo"> </td>
 						</tr>
-						<tr>
+						<!-- <tr>
 							<td>Factura No.</td>
 							<td> <input type="text" ng-model="dataH.factura"> </td>
 							<td>Orden No.</td>
 							<td> <input type="text" ng-model="dataH.ordenNo"> </td>
-						</tr>
+						</tr> -->
 						<tr>
-							<td>NCF</td>
-							<td> <input type="text" class="ncf-ei" ng-model="dataH.ncf"> </td>
+							<!-- <td>NCF</td>
+							<td> <input type="text" class="ncf-ei" ng-model="dataH.ncf"> </td> -->
 							<td>Fecha</td>
 							<td> <input type="text" class="input-disabled" ng-model="dataH.fecha" ng-disabled="true" datepicker required> </td>
 						</tr>
@@ -154,16 +154,16 @@
 									<option value="CR">Credito</option>
 								</select>
 							</td>
-							<td>Dias Plazo</td>
+							<!-- <td>Dias Plazo</td>
 							<td> 
 								<input type="text" ng-model="dataH.venceDias" ng-change="venceFecha()" ng-disabled="condicionBool">
-							</td>
+							</td> -->
 						</tr>
 						<tr>
 							<td>Nota</td>
 							<td> <textarea name="nota" id="nota" cols="40" rows="2" ng-model="dataH.nota"></textarea> </td>
-							<td>Vence</td>
-							<td> <input type="text" disabled ng-model="dataH.fechaVence" ng-disabled="condicionBool"></td>
+							<!-- <td>Vence</td>
+							<td> <input type="text" disabled ng-model="dataH.fechaVence" ng-disabled="condicionBool"></td> -->
 						</tr>
 
 					</table>

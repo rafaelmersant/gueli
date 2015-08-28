@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'gueli',
     'administracion',
     'inventario',
+    'facturacion',
 )
 
 MIDDLEWARE_CLASSES = (
