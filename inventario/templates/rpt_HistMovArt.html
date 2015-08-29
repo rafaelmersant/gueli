@@ -51,22 +51,22 @@
 			<div class="caja-movimientos">
 				<table>
 					<tr class="productos-table-header-transf">
-						<td>E/S</td>
+						<td>Fecha</td>
 						<td>Tipo</td>
 						<td>Cantidad</td>
 						<td>Precio</td>
 						<td>Valor</td>
 						<td>Documento</td>
-						<td>Fecha</td>
+						<td>E/S</td>
 					</tr>
 					<tr ng-repeat="registro in resultados" class="productos-table-detail-search">
-						<td>[[registro.tipo_mov]]</td>
+						<td>[[registro.fechaMovimiento | date : 'dd/MM/yyyy']]</td>
 						<td>[[registro.documento]]</td>
 						<td>[[registro.cantidad | number : 2]]</td>
 						<td>[[registro.precio | number : 2]]</td>
 						<td>[[registro.cantidad * registro.precio | number : 2]]</td>
 						<td>[[registro.documentoNo | numberFixedLen : 8]]</td>
-						<td>[[registro.fechaMovimiento | date : 'dd/MM/yyyy']]</td>
+						<td>[[registro.tipo_mov]]</td>
 					</tr>
 				</table>
 

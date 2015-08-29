@@ -287,7 +287,7 @@ class RPTResumenVentas(LoginRequiredMixin, DetailView):
 
 		for detalle in registros:
 			data.append({
-				'id': detalle.id,
+				# 'id': detalle.id,
 				'fecha': detalle.fecha,
 				'valor': detalle.valor,
 				})

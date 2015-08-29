@@ -28,14 +28,15 @@
 						<option ng-repeat="almacen in almacenes" value="[[almacen.id]]">[[almacen.descripcion]]</option>
 					</select>	
 				</div>
-			</div>
-
-			<div ng-if="busquedaValor == 'producto'" class="busqueda-producto">
-				<div class="producto-find-ei">
-					<span>Producto</span>
-					<input type="text" ng-model="$parent.producto" ng-keypress="existenciaPorProducto($event)" class="producto-field-ei">
+				
+				<div ng-if="busquedaValor == 'producto'" class="busqueda-producto">
+					<div class="producto-find-ei">
+						<span>Producto</span>
+						<input type="text" ng-model="$parent.producto" ng-keypress="existenciaPorProducto($event)" class="producto-field-ei">
+					</div>
 				</div>
 			</div>
+
 
 			<div ng-if="busquedaValor == 'categoria'" class="busqueda-categoria">
 

@@ -18,7 +18,7 @@ class Factura(models.Model):
 	posteo = models.CharField(max_length=1, choices=posteo_choices, default='N')
 	
 	noFactura = models.PositiveIntegerField("No. Factura", unique=True)
-	fecha = models.DateTimeField(auto_now_add=True)
+	fecha = models.DateField(auto_now_add=True)
 	estatus = models.CharField(max_length=1, choices=facturas_choices, default='A')
 	descrpAnulacion = models.CharField(max_length=150, blank=True, null=True)
 	ordenCompra = models.PositiveIntegerField(null=True, blank=True)
