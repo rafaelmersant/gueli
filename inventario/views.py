@@ -46,6 +46,12 @@ class RPTExistenciaArticuloView(LoginRequiredMixin, TemplateView):
 	template_name = 'rpt_ExistenciaArticulo.html'
 
 
+# Reporte de Existencia de Articulo(s)
+class RPTExistenciaArticuloView2(LoginRequiredMixin, TemplateView):
+
+	template_name = 'rpt_ExistenciaArticuloPrecio.html'
+
+
 # Reporte para Conteo Fisico de Articulos
 class RPTConteoFisicoArticuloView(LoginRequiredMixin, TemplateView):
 
@@ -653,7 +659,8 @@ class RPTMovimientoProductoAPIView(APIView):
 class getExistenciaRPT(ListView):
 
 	queryset = Existencia.objects.all().values('producto__descripcion','producto__codigo','producto__categoria__descripcion')\
-										.annotate(totalCantidad=Sum('cantidad'),totalCosto=Sum('producto__costo')).order_by('producto__categoria__descripcion','producto__descripcion')
+										.annotate(totalCantidad=Sum('cantidad'),totalCosto=Sum('producto__costo'), \
+											totalPrecio=Sum('producto__precio')).order_by('producto__categoria__descripcion','producto__descripcion')
 	def get(self, request, *args, **kwargs):
 		
 		almacen = self.request.GET.get('almacen')
@@ -707,6 +714,7 @@ class getExistenciaRPT(ListView):
 				'producto': existencia['producto__descripcion'],
 				'totalCantidad': existencia['totalCantidad'],
 				'totalCosto': existencia['totalCosto'],
+				'totalPrecio': existencia['totalPrecio']
 				})
 
 		return JsonResponse(data, safe=False)

@@ -350,6 +350,156 @@
         }
       }
 
+    }])
+
+    //****************************************************
+    //CONTROLLERS Existencia PRECIO                      *
+    //****************************************************
+    .controller('RPTExistenciaArticuloCtrl2', ['$scope', '$filter', 'InventarioServiceRPT', 'InventarioService',
+                                                function ($scope, $filter, InventarioServiceRPT, InventarioService) {
+
+      // Inicializacion de Variables
+      $scope.iconcheck = 'icon-checkbox-unchecked';
+      $scope.regAll = true;
+      $scope.categoriasSeleccionadas = [];
+      $scope.reg = [];
+      $scope.valoresChk = [];
+
+      $scope.mostrarCategorias = true;
+      $scope.almacen = '*';
+      $scope.busquedaValor = 'producto';
+
+      $scope.toggleCategorias = function() {
+        $scope.mostrarCategorias = !$scope.mostrarCategorias;
+      }
+
+      // Funcion para mostrar error por pantalla
+      $scope.mostrarError = function(error) {
+        $scope.errorMsg = error;
+        $scope.errorShow = true;
+      }
+
+      // Mostrar/Ocultar error
+      $scope.toggleError = function() {
+        $scope.errorShow = !$scope.errorShow;
+      }
+
+      //Cuando se le de click al checkbox de categorias.
+      $scope.seleccionAll = function() {
+
+        $scope.categorias.forEach(function (data) {
+          if ($scope.regAll === true){
+
+            $scope.valoresChk[data.id] = true;
+            $scope.categoriasSeleccionadas.push(data);
+          }
+          else{
+
+            $scope.valoresChk[data.id] = false;
+            $scope.categoriasSeleccionadas.splice(data);
+          }
+        });
+
+        if($scope.regAll === false) {
+          $scope.regAll = true;
+          $scope.iconcheck = 'icon-checkbox-unchecked';
+        } else {
+          $scope.regAll = false;
+          $scope.iconcheck = 'icon-checkbox-checked';
+        }
+      }
+
+      //Cuando se le de click a un checkbox de la lista
+      $scope.selectedReg = function(iReg) {
+        
+        index = $scope.categorias.indexOf(iReg);
+
+        if ($scope.reg[$scope.categorias[index].id] === true){
+          $scope.categoriasSeleccionadas.push($scope.categorias[index]);
+        }
+        else{
+          $scope.categoriasSeleccionadas = _.without($scope.categoriasSeleccionadas, _.findWhere($scope.categoriasSeleccionadas, {id : iReg.id}));
+        }
+      }
+
+      // Traer registros de existencia (Filtros: almacen, categorias)
+      $scope.existencia = function() {
+        try {
+          if($scope.busquedaValor == 'categoria') {
+
+            InventarioServiceRPT.existencia($scope.almacen, $scope.categoriasSeleccionadas).then(function (data) {
+              $scope.registros = data;
+            });
+          } else {
+            InventarioServiceRPT.existenciaByProducto($scope.almacen, $scope.producto).then(function (data) {
+              $scope.registros = data;
+            });
+          }
+        } catch (e) {
+          $scope.mostrarError(e);
+        }
+      }
+
+      // Buscar existencia por producto <ENTER>
+      $scope.existenciaPorProducto = function($event) {
+        if($event.keyCode == 13) {
+          $scope.existencia();
+        }
+      }
+
+      $scope.getCategoriasProductos = function() {
+        InventarioServiceRPT.categorias().then(function (data) {
+          $scope.categorias = data;
+        });
+      }
+
+      $scope.getAlmacenes = function() {
+        InventarioService.almacenes().then(function (data) {
+          var almacenes = [];
+          var todos = new Object();
+
+          todos.id = '*';
+          todos.descripcion = 'TODOS';
+          almacenes.push(todos);
+          almacenes = almacenes.concat(data);
+
+          $scope.almacenes = almacenes;
+        });
+      }
+
+      //Traer productos
+      $scope.getProducto = function($event) {
+        $event.preventDefault();
+        var descrp = '';
+
+        if($event.type != 'click') {
+          descrp = $scope.producto;
+        }
+
+        InventarioService.productos(descrp).then(function (data) {
+          if(data.length > 0){
+            $scope.productos = data;
+
+            $scope.tableProducto = true;
+            $scope.productoNoExiste = '';
+          } else {
+            $scope.tableProducto = false;
+            $scope.productoNoExiste = 'No existe el producto'
+          }
+        });
+      }
+
+      // Traer registros de existencia para Conteo Fisico (Filtros: almacen, categorias)
+      $scope.existenciaConteoFisico = function() {
+        try {
+          InventarioServiceRPT.existenciaConteoFisico($scope.almacen, $scope.categoriasSeleccionadas).then(function (data) {
+            $scope.registros = data;
+          });
+        } catch (e) {
+          $scope.mostrarError(e);
+        }
+      }
+
     }]);
 
 })(_);  

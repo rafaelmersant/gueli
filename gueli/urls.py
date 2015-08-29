@@ -11,7 +11,7 @@ from inventario.views import InventarioView, InventarioSalidaView, AjusteInvView
                                 RPTExistenciaArticuloView, ListadoAjustesInvView, AjusteInventarioById, TransferenciaInvView, \
                                 ListadoTransfInvView, ListadoSalidasInvView, SalidaInventarioById, InventarioEliminarView, \
                                 InventarioSalidaEliminarView, RPTConteoFisicoArticuloView, getExistenciaConteoFisicoRPT, \
-                                ProcesarAjusteInvView, EntradasInvBySuplidorRangoFecha
+                                ProcesarAjusteInvView, EntradasInvBySuplidorRangoFecha, RPTExistenciaArticuloView2
 
 from inventario.views import ListadoEntradasInvView, ListadoAlmacenesView, getExistenciaByProductoView, \
                                 getExistenciaRPT, RPTMovimientoProductoAPIView
@@ -78,6 +78,7 @@ urlpatterns = patterns('',
     url(r'^inventario/print/(?P<entrada>[\d]+)/$', ImprimirEntradaInventarioView.as_view(), name='Inventario_print'),
     #Inventario#Reportes
     url(r'^inventario/reportes/existenciaArticulo/$', RPTExistenciaArticuloView.as_view(), name='Inventario_reporte_existencia'),
+    url(r'^inventario/reportes/existenciaArticulo2/$', RPTExistenciaArticuloView2.as_view(), name='Inventario_reporte_existencia2'),
     url(r'^inventario/reportes/conteoFisico/$', RPTConteoFisicoArticuloView.as_view(), name='Inventario_reporte_conteoFisico'),
     url(r'^inventario/reportes/histMovArt/$', RPTMovimientoArticuloView.as_view(), name='Inventario_reporte_historico'),
     
@@ -99,7 +100,7 @@ urlpatterns = patterns('',
     url(r'^facturacion/reportes/ventasDiarias/$', RPTVentasDiariasView.as_view(), name='Reporte_ventasDiarias'),
     url(r'^facturacion/reportes/ventasResumido/$', RPTVentasResumidoView.as_view(), name='Reporte_ventasResumido'),
     url(r'^facturacion/reportes/ventasResumido/json/$', RPTResumenVentas.as_view(), name='Reporte_ventasResumido_json'),
-    
+
 
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^api/', include(router.urls)),
